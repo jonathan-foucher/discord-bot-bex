@@ -2,7 +2,7 @@ const express = require('express');
 
 const bodyParser = require('body-parser');
 
-const port = process.env.PORT;
+const port = process.env.HTTP_PORT;
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,6 +15,12 @@ app.post('/data', (req, res) => {
   res.end();
 });
 
-app.listen(port, () => {
-  console.log(`Application is listening on port ${port}`);
+const server = app.listen(port, () => {
+  console.info(`Application is listening on port ${port}`);
+});
+
+process.on('SIGTERM', () => {
+  server.close(() => {
+    console.info('Http server closed');
+  });
 });

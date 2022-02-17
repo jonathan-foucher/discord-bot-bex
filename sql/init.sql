@@ -7,7 +7,9 @@ create table client (
 
 
 -- init client table with mails
-insert into client (email, update_date) values
-('someone@somedomain.com', now()),
-('someoneelse@anotherdomain.com', now())
+insert into client (email, update_date) 
+select emails.email, now() update_date
+from (values
+('someone@somedomain.com'), ('someoneelse@anotherdomain.com')
+) as emails(email)
 on conflict do nothing;

@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const camelCase = require('camelcase-keys');
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -8,12 +9,12 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 });
 
-function getClientByEmail(email) {
-  const query = `select * from client where email = '${email}';`;
+function getCustomerByEmail(email) {
+  const query = `select * from customer where email = '${email}';`;
   return pool.query(query)
     .then((results) => {
       if (results) {
-        return results.rows[0];
+        return camelCase(results.rows[0]);
       }
       return null;
     })
@@ -24,13 +25,13 @@ function getClientByEmail(email) {
     });
 }
 
-function saveNewClientEmail(email) {
-  const query = `insert into client (email, update_date) values ('${email}', now());`;
+function saveNewCustomerEmail(email) {
+  const query = `insert into customer (email, update_date) values ('${email}', now());`;
   return pool.query(query)
     .catch((error) => {
       if (error) {
         if (error.code === '23505') {
-          console.error('Email already existing');
+          console.error('Email already exists');
         } else {
           throw error;
         }
@@ -38,8 +39,8 @@ function saveNewClientEmail(email) {
     });
 }
 
-function updateClientDiscordId(email, discordId) {
-  const query = `update client set discord_id = '${discordId}', update_date = now() where email = '${email}';`;
+function updateCustomerDiscordId(email, discordId) {
+  const query = `update customer set discord_id = '${discordId}', update_date = now() where email = '${email}';`;
   return pool.query(query)
     .catch((error) => {
       if (error) {
@@ -48,7 +49,7 @@ function updateClientDiscordId(email, discordId) {
     });
 }
 
-module.exports = { getClientByEmail, saveNewClientEmail, updateClientDiscordId };
+module.exports = { getCustomerByEmail, saveNewCustomerEmail, updateCustomerDiscordId };
 
 process.on('SIGTERM', () => {
   pool.end();

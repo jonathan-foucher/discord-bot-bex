@@ -6,14 +6,17 @@ This bot listens to http requests posted by system.io with webhooks inside a wor
 The user can then use the `/link-email` command to link his discord account to this email in the database and receive the "Membre" role on the BEX discord server.
 
 # Developpement environement
-## Node and the libraries
+## Node
 You need to install node to start the project.
 Then you can run the `npm i` command to install all the required packages.
-## Docker and the database
-You will also need to install Docker to start the database in local.
+## Docker
+You will also need to install docker and docker-compose to start the database in local.
 Once Docker has started, go to the `/docker` folder with your terminal and run the `docker-compose up -d` command. It will download the required images and start the database container.
 
 A workaround is also possible if you don't want to use Docker in your developement environment by installing a postgresql database on your machine.
+
+# Database migrations
+In order to initialize the database, play the migrations scripts with the command `npm run migrate up`
 
 ## Environment variables
 To provide the environment variables, just make a copy of the `.env.template` file and name it `.env`.
@@ -25,6 +28,7 @@ Then you can complete it with your values.
 <br>**DB_NAME**: The postgresql database name
 <br>**DB_USER**: The postgresql database username
 <br>**DB_PASSWORD**: The postgresql database password
+<br>**DATABASE_URL**: The postgresql database url, you shouldn't modify it
 <br>**DISCORD_APP_ID**: The discord application id
 <br>**DISCORD_SERVER_ID**: The discord server id (= guild id)
 <br>**DISCORD_BOT_TOKEN**: The discord bot token

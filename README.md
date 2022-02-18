@@ -15,9 +15,6 @@ Once Docker has started, go to the `/docker` folder with your terminal and run t
 
 A workaround is also possible if you don't want to use Docker in your developement environment by installing a postgresql database on your machine.
 
-# Database migrations
-In order to initialize the database, play the migrations scripts with the command `npm run migrate up`
-
 ## Environment variables
 To provide the environment variables, just make a copy of the `.env.template` file and name it `.env`.
 Then you can complete it with your values.
@@ -33,6 +30,9 @@ Then you can complete it with your values.
 <br>**DISCORD_SERVER_ID**: The discord server id (= guild id)
 <br>**DISCORD_BOT_TOKEN**: The discord bot token
 <br>**DISCORD_MEMBER_ROLE_ID**: The discord "Membre" role id
+
+# Database migrations
+In order to initialize the database, play the migrations scripts with the command `npm run migrate up`
 
 ## Start the application
 To start the application just run `node main.js` on the main file you want to run.

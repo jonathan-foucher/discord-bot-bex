@@ -1,5 +1,5 @@
 {
-  "name": "discord-systemeio-role-bot",
+  "name": "discord-bot-bex",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -23,9 +23,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jonathan-foucher/discord-systemeio-role-bot.git"
+    "url": "git+https://github.com/jonathan-foucher/discord-bot-bex.git"
   },
   "author": "Jonathan Foucher",
   "license": "ISC",
-  "homepage": "https://github.com/jonathan-foucher/discord-systemeio-role-bot#readme"
+  "homepage": "https://github.com/jonathan-foucher/discord-bot-bex#readme"
 }

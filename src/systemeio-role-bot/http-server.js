@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const database = require('./db-connection');
-const utils = require('./utils');
+const utils = require('../common/utils');
 
 const port = process.env.HTTP_PORT;
 

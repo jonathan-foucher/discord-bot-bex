@@ -1,6 +1,6 @@
 const { Client, Intents } = require('discord.js');
 const database = require('./db-connection');
-const utils = require('./utils');
+const utils = require('../common/utils');
 
 const botToken = process.env.DISCORD_BOT_TOKEN;
 const serverId = process.env.DISCORD_SERVER_ID;

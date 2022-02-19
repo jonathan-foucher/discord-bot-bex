@@ -1,5 +1,6 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const logger = require('./logger');
 
 const appId = process.env.DISCORD_APP_ID;
 const botToken = process.env.DISCORD_BOT_TOKEN;
@@ -24,15 +25,15 @@ const rest = new REST({ version: '9' }).setToken(botToken);
 
 (async () => {
   try {
-    console.info('Started refreshing application (/) commands.');
+    logger.info('Started refreshing application (/) commands.');
 
     await rest.put(
       Routes.applicationCommands(appId),
       { body: commands },
     );
 
-    console.info('Successfully reloaded application (/) commands.');
+    logger.info('Successfully reloaded application (/) commands.');
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 })();

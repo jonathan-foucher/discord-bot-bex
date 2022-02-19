@@ -1,20 +1,21 @@
 const { Client, Intents } = require('discord.js');
 const database = require('./db-connection');
 const utils = require('../common/utils');
+const logger = require('../common/logger');
 
 const botToken = process.env.DISCORD_BOT_TOKEN;
 const serverId = process.env.DISCORD_SERVER_ID;
 const memberRoleId = process.env.DISCORD_MEMBER_ROLE_ID;
 
 function manageUnexpectedError(error, interaction) {
-  console.error(error);
+  logger.error(error);
   interaction.reply({ content: 'An unexpected error has occured, please contact an administrator', ephemeral: true });
 }
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] });
 
 client.on('ready', () => {
-  console.info(`Logged in as ${client.user.tag}!`);
+  logger.info(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('interactionCreate', async (interaction) => {

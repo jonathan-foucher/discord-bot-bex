@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const camelCase = require('camelcase-keys');
+const logger = require('../common/logger');
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -31,7 +32,7 @@ function saveNewCustomerEmail(email) {
     .catch((error) => {
       if (error) {
         if (error.code === '23505') {
-          console.error('Email already exists');
+          logger.error('Email already exists');
         } else {
           throw error;
         }
@@ -53,5 +54,5 @@ module.exports = { getCustomerByEmail, saveNewCustomerEmail, updateCustomerDisco
 
 process.on('SIGTERM', () => {
   pool.end();
-  console.info('Database pool shut down');
+  logger.info('Database pool shut down');
 });

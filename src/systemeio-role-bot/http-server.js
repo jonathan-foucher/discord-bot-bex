@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.post('/customers/register', (req, res) => {
   logger.info('POST on /customers/register received');
-  const email = req.body.data.customer.email.toLowerCase();
+  const email = req.body.data.contact.email.toLowerCase();
   if (utils.isEmailValid(email)) {
     database.saveNewCustomerEmail(email);
   } else {

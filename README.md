@@ -30,6 +30,7 @@ Then you can complete it with your values.
 <br>**DISCORD_SERVER_ID**: The discord server id (= guild id)
 <br>**DISCORD_BOT_TOKEN**: The discord bot token
 <br>**DISCORD_MEMBER_ROLE_ID**: The discord "Membre" role id
+<br>**COMMON_COACHING_COURSE_ID**: Systeme.io common coaching course id
 
 # Database migrations
 In order to initialize the database, play the migrations scripts with the command `npm run migrate up`

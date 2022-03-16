@@ -26,7 +26,7 @@ function getCustomerByEmail(email) {
     });
 }
 
-function saveNewCustomerEmail(email) {
+function saveNewCommonCoachingCustomerEmail(email) {
   const query = `insert into customer (email, update_date) values ('${email}', now());`;
   return pool.query(query)
     .catch((error) => {
@@ -50,7 +50,7 @@ function updateCustomerDiscordId(email, discordId) {
     });
 }
 
-module.exports = { getCustomerByEmail, saveNewCustomerEmail, updateCustomerDiscordId };
+module.exports = { getCustomerByEmail, saveNewCommonCoachingCustomerEmail, updateCustomerDiscordId };
 
 process.on('SIGTERM', () => {
   pool.end();

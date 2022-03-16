@@ -5,18 +5,25 @@ const utils = require('../common/utils');
 const logger = require('../common/logger');
 
 const port = process.env.HTTP_PORT;
+const commonCoachingCourseId = parseInt(process.env.COMMON_COACHING_COURSE_ID, 10);
 
 const app = express();
 app.use(bodyParser.json());
 
 app.post('/customers/register', (req, res) => {
   logger.info('POST on /customers/register received');
-  const email = req.body.data.contact.email.toLowerCase();
-  if (utils.isEmailValid(email)) {
-    database.saveNewCustomerEmail(email);
+  const courseId =  req.body && req.body.data && req.body.data.course ? req.body.data.course.id : undefined;
+  if(commonCoachingCourseId === courseId) {
+    const email = req.body.data.contact && req.body.data.contact.email ? req.body.data.contact.email.toLowerCase() : undefined;
+    if (utils.isEmailValid(email)) {
+      database.saveNewCommonCoachingCustomerEmail(email);
+    } else {
+      logger.error('Email is not valid : ' + email);
+    }
   } else {
-    logger.error('Email is not valid');
+    logger.info('Not common coaching course');
   }
+
   res.end();
 });
 

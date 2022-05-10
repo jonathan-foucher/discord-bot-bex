@@ -32,7 +32,7 @@ function saveNewCommonCoachingCustomerEmail(email) {
     .catch((error) => {
       if (error) {
         if (error.code === '23505') {
-          logger.error('Email already exists');
+          logger.warn('Email already exists');
         } else {
           throw error;
         }

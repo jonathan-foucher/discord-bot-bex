@@ -68,6 +68,25 @@ client.on('interactionCreate', async (interaction) => {
           }
         })
         .catch((error) => manageUnexpectedError(error, interaction));
+    } else if (interaction.commandName === 'add-email') {
+      const email = interaction.options.get('email').value;
+
+      if (!utils.isEmailValid(email)) {
+        interaction.reply({ content: 'You have to use this command with a valid email address', ephemeral: true });
+      } else {
+        database.getCustomerByEmail(email)
+          .then((customer) => {
+            if (customer) {
+              interaction.reply({ content: 'This email address is already in the database', ephemeral: true });
+            } else {
+              database.saveNewCommonCoachingCustomerEmail(email)
+                .then(() => {
+                  interaction.reply({ content: 'This email address has been successfully added.', ephemeral: true });
+                })
+                .catch((error) => manageUnexpectedError(error, interaction));
+            }
+          });
+      }
     }
   } catch (error) {
     manageUnexpectedError(error, interaction);

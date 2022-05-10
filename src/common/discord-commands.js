@@ -5,6 +5,7 @@ const logger = require('./logger');
 const appId = process.env.DISCORD_APP_ID;
 const botToken = process.env.DISCORD_BOT_TOKEN;
 
+const discordAdminPerm = 0x0000000000000008;
 const commands = [
   {
     type: 1,
@@ -18,6 +19,20 @@ const commands = [
         required: true,
       },
     ],
+  },
+  {
+    type: 1,
+    name: 'add-email',
+    description: 'Add an email address (admin only)',
+    options: [
+      {
+        type: 3,
+        name: 'email',
+        description: 'The email address to add',
+        required: true,
+      },
+    ],
+    default_member_permissions: discordAdminPerm,
   },
 ];
 

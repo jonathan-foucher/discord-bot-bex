@@ -51,7 +51,12 @@ client.on('interactionCreate', async (interaction) => {
                   interaction.reply({ content: 'We can\'t find your email address in the customer list', ephemeral: true });
                 } else if (customer.discordId) {
                   if (customer.discordId === discordId) {
-                    interaction.reply({ content: 'This email address is already linked to your discord account', ephemeral: true });
+                    if (!member.roles.cache.some(r => r.id === memberRoleId)) {
+                      member.roles.add(memberRole);
+                      interaction.reply({ content: 'This email address is already linked to your discord account, the role was added again', ephemeral: true });
+                    } else {
+                      interaction.reply({ content: 'This email address is already linked to your discord account and you already have the role', ephemeral: true });
+                    }
                   } else {
                     interaction.reply({ content: 'This email address is already linked to another discord account', ephemeral: true });
                   }
